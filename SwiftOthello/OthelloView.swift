@@ -35,7 +35,7 @@ class OthelloView: UIView {
     let lbl:UILabel = UILabel()
     var isGameOver = false
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder!) {
         let appFrame = UIScreen.mainScreen().applicationFrame
         side = appFrame.size.width / 8
         top = (appFrame.size.height - (side * 8)) / 2
@@ -98,7 +98,7 @@ class OthelloView: UIView {
         setNeedsDisplay()
     }
     
-    func getPos(touches: NSSet!) -> (x: Int, y: Int)? {
+    func getPos(touches: NSSet!) -> (Int, Int)? {
         let touch:UITouch = touches.anyObject() as UITouch
         let point = touch.locationInView(self)
         for y in 1...8 {
