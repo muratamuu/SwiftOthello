@@ -99,7 +99,7 @@ class OthelloView: UIView {
     }
     
     func getPos(touches: NSSet!) -> (Int, Int)? {
-        let touch:UITouch = touches.anyObject() as UITouch
+        let touch = touches.anyObject() as UITouch
         let point = touch.locationInView(self)
         for y in 1...8 {
             for x in 1...8 {
@@ -124,7 +124,7 @@ class OthelloView: UIView {
         let (free, black, white) = calcStones(board)
         let canBlack = canPlaced(board, BLACK_STONE)
         let canWhite = canPlaced(board, WHITE_STONE)
-        if free == 0 || (!canBlack && !canWhite) {
+        if free == 0 || (canBlack == nil && canWhite == nil) {
             lbl.text = "Game Over (Black:\(black) White:\(white))"
             isGameOver = true
         } else {
@@ -146,7 +146,7 @@ func flip(board:[[Int]], x:Int, y:Int, stone:Int) -> [(Int, Int)]? {
     result += flipLine(board, x, y, stone, 1,-1)
     result += flipLine(board, x, y, stone,-1, 1)
     if result.count > 0 {
-        result += (x, y)
+        result += [(x, y)]
         return result
     } else {
         return nil
@@ -161,7 +161,7 @@ func flipLine(board:[[Int]], x:Int, y:Int, stone:Int, dx:Int, dy:Int) -> [(Int, 
         } else if board[y][x] == stone {
             return []
         } else if var result = flipLoop(x+dx, y+dy) {
-            result += (x, y)
+            result += [(x, y)]
             return result
         } else {
             return nil
@@ -178,7 +178,7 @@ func canPlaced(board:[[Int]], stone: Int) -> [(Int, Int)]? {
     for y in 1...8 {
         for x in 1...8 {
             if let res = flip(board, x, y, stone) {
-                result += (x, y)
+                result += [(x, y)]
             }
         }
     }
