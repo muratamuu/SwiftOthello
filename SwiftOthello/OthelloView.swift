@@ -25,17 +25,18 @@ let initboard = [
 
 class OthelloView: UIView {
 
-    var board:[[Int]]
+    var board:[[Int]] = []
     let white = UIColor.whiteColor().CGColor
     let black = UIColor.blackColor().CGColor
     let green = UIColor(red:0.6, green:1.0, blue:0.2, alpha:1.0).CGColor
-    var side:CGFloat
-    var top:CGFloat
+    var side:CGFloat = 0.0
+    var top:CGFloat = 0.0
     let left:CGFloat = 0
     let lbl:UILabel = UILabel()
     var isGameOver = false
     
-    required init(coder aDecoder: NSCoder!) {
+    
+    required init(coder aDecoder: NSCoder) {
         let appFrame = UIScreen.mainScreen().applicationFrame
         side = appFrame.size.width / 8
         top = (appFrame.size.height - (side * 8)) / 2
@@ -47,6 +48,7 @@ class OthelloView: UIView {
         lbl.frame = CGRectMake(10, top / 2, appFrame.size.width, top / 2)
         addSubview(lbl)
     }
+
     
     override func drawRect(rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
@@ -73,7 +75,7 @@ class OthelloView: UIView {
         }
     }
     
-    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         if isGameOver {
             board = initboard
             updateGame()
@@ -163,9 +165,8 @@ func flipLine(board:[[Int]], x:Int, y:Int, stone:Int, dx:Int, dy:Int) -> [(Int, 
         } else if var result = flipLoop(x+dx, y+dy) {
             result += [(x, y)]
             return result
-        } else {
-            return nil
         }
+        return nil
     }
     if let result = flipLoop(x+dx, y+dy) {
         return result
