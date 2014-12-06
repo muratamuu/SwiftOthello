@@ -26,5 +26,5 @@ SwiftOthello/OthelloView.swift (上記記事でプログラミングしたソー
 
 Xcode6でコンパイルしてシミューレータまたはiPhoneに入れて実行します。
 
-<img src="20140907_00.png" alt="オセロ画像" width="50%" height="50%" />
+<img src="20140907_00.png" alt="オセロ画像" width="20%" height="20%" />
 
